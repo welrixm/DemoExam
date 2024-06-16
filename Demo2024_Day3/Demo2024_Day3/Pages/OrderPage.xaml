@@ -1,0 +1,57 @@
+﻿<Page x:Class="Demo2024_Day3.Pages.OrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Demo2024_Day3.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrderPage" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListView x:Name="ListOrder" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="300"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding datecreation}" Style="{StaticResource TxtBlock}"></TextBlock>
+                                <TextBlock Text="{Binding orderstatus}" Style="{StaticResource TxtBlock}"></TextBlock>
+                                <TextBlock Text="{Binding paymentstatus}" Style="{StaticResource TxtBlock}"></TextBlock>
+                                <TextBlock Text="{Binding addres}" Style="{StaticResource TxtBlock}"></TextBlock>
+                                <TextBlock Text="{Binding paymentmethod}" Style="{StaticResource TxtBlock}"></TextBlock>
+                                <ListBox ItemsSource="{Binding orderpersonlist}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <TextBlock Style="{StaticResource TxtBlock}" Text="{Binding user.person.FUO}"></TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Visibility="{Binding Visible}" Style="{StaticResource Btn}" Name="FixBtn" Content="Изменение статуса" Click="FixBtn_Click"></Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="1" Style="{StaticResource Btn}" Click="AddOrderBtn_Click"  Name="AddOrderBtn" Content="Добавить документ"></Button>
+    </Grid>
+</Page>
